@@ -136,9 +136,6 @@ class ContactPage_Controller extends Page_Controller
 
 
 	function index() {
-		error_log( "Contact page index" );
-		error_log( "AJAX? ".$this->isAjax );
-
 		if ( $this->isAjax ) {
 			return $this->renderWith( "ContactPageModal" );
 		}
@@ -150,7 +147,6 @@ class ContactPage_Controller extends Page_Controller
 
 	//The function which generates our form
 	function ContactForm() {
-		error_log( "Render form" );
 		$name = _t( 'ContactPage.NAME', 'Name' );
 		$email = _t( 'ContactPage.EMAIL', 'Email' );
 		$comments = _t( 'ContactPage.COMMENTS', 'Comments' );
@@ -205,13 +201,7 @@ class ContactPage_Controller extends Page_Controller
 		$cpm->Email = $data['Email'];
 		$cpm->Name = $data['Name'];
 		$cpm->Comments = $data['Comments'];
-		$cpm->write();
-
-		error_log("==== CONTACT FORM ====");
-		error_log(print_r($data,1));
-
-		error_log( "Sending contact form" );
-
+		
 		//Set data
 		$From = $data['Email'];
 		//$From = Email::getAdminEmail();
@@ -228,20 +218,13 @@ class ContactPage_Controller extends Page_Controller
 		//return to submitted message
 
 		if ( $this->isAjax ) {
-			error_log( "SCF: AJAX" );
 			$result = array();
-
-
 			$result['message'] = $this->SubmitText;
 			$result['success'] = 1;
-
-			error_log( "ENCODING TO JSON" );
-
 			echo json_encode( $result );
 			die;
 		}
 		else {
-			error_log( "SCF: NON AJAX" );
 			Director::redirect( Director::baseURL(). $this->URLSegment . "/?success=1" );
 		}
 		//
