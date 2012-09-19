@@ -200,11 +200,21 @@ class ContactPage_Controller extends Page_Controller
 	//The function that handles our form submission
 	function SendContactForm( $data, $form ) {
 
+		// saving data before sending contact form
+		$cpm = new ContactPageMessage();
+		$cpm->Email = $data['Email'];
+		$cpm->Name = $data['Name'];
+		$cpm->Comments = $data['Comments'];
+		$cpm->write();
+
+		error_log("==== CONTACT FORM ====");
+		error_log(print_r($data,1));
+
 		error_log( "Sending contact form" );
 
 		//Set data
-		//$From = $data['Email'];
-		$From = Email::getAdminEmail();
+		$From = $data['Email'];
+		//$From = Email::getAdminEmail();
 
 		$To = $this->Mailto;
 		$Subject = "Website Contact message";
