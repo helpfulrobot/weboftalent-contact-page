@@ -22,8 +22,11 @@ Map location to show on the contact page of your website.  Edit on a google map.
 * Email address to send form submissions can be set here, but will use the administrator email if this field is not set.
 * Text to display to the user after a successful form submission.
 
+### Templates
+Inline CSS and a definition of jQuery are included in the example template.  Please override this template in your own theme and move these to more appropriate locations (e.g. main Page template and theme CSS files)
+
 ## Silverstripe Version Compatibility
 2.4 only (tested with 2.4.5+) - stable24 branch
 
 ## Dependencies
-mappable
+Adapted Mappable module, https://github.com/gordonbanderson/Mappable/tree/googlemapsv3api
