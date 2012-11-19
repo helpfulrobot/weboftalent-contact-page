@@ -39,16 +39,42 @@ $Map
 <% if Success %>
 <% else %>
 <br/>
+
+<% end_if %>
+
+<p class="note">
+Please override this template in your own theme and do the following
+<ul>
+<li class="note">* Move the declaration of jQuery to your Page template</li>
+<li class="note">* Move the definition of the css class .fullWidthMap to your main stylesheet as opposed to inline in the HTML of this template</li>
+</ul>
+</p>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<style>
+.fullWidthMap {
+	height: 400px;
+	width: 50%;
+}
+
+.note, .note  li {
+	font-style: italic;
+	color: red;
+	}
+</style>
+
 <div class="formBox">
 $ContactForm
 </div>
-<% end_if %>
+
 
 <script type="text/javascript">
 
-  $(document).ready(function() {
-  	load();
-  	});
+
+     (function($) {
+       $(document).ready(function() {
+  			load();
+  		});
+     })(jQuery);
 
 </script>
 <% end_cached %>
