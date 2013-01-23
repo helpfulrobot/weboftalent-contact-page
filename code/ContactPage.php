@@ -13,8 +13,8 @@
 class ContactPage extends Page  implements Mappable
 {
 	static $db = array(
-		'Latitude' => 'Decimal(9,6)',
-		'Longitude' => 'Decimal(9,6)',
+		'Latitude' => 'Decimal(18,15)',
+		'Longitude' => 'Decimal(18,15)',
 		'Zoom' => 'Int',
 
 		'ContactAddress' => 'Text',
@@ -22,7 +22,9 @@ class ContactPage extends Page  implements Mappable
 		'ContactFaxNumber' => 'Varchar(255)',
 		'ContactEmailAddress' => 'Varchar(255)',
 		'Mailto' => 'Varchar(100)', //Email address to send submissions to
-		'SubmitText' => 'HTMLText' //Text presented after submitting message
+		'SubmitText' => 'HTMLText', //Text presented after submitting message,
+		'Twitter' => 'Varchar(255)',
+		'Facebook' => 'Varchar(255)'
 	);
 
 
@@ -38,7 +40,7 @@ class ContactPage extends Page  implements Mappable
 	}
 
 	public function getMapContent() {
-		return GoogleMapUtil::sanitize( $this->renderWith( 'ContactPageGoogleMapInfoWindow' ) );
+		return MapUtil::sanitize( $this->renderWith( 'ContactPageGoogleMapInfoWindow' ) );
 	}
 
 	public function getMapCategory() {
@@ -52,22 +54,16 @@ class ContactPage extends Page  implements Mappable
 	/* end Mappable interface */
 
 
-	// map with styles
 	public function Map() {
-		$model = DataObject::get_by_id( 'ContactPage', $this->ID );
-		//    $prod->SetZoom(4);
-
-		$map = $model->GoogleMap();
-		$map->setDelayLoadMapFunction( true );
-		$map->setZoom( $model->Zoom );
-		$map->setAdditionalCSSClasses( 'fullWidthMap' );
-		$map->setShowInlineMapDivStyle( false );
-
-		return $map;
-	}
-
-
-
+	    $map = $this->RenderMap();
+	    // $map->setDelayLoadMapFunction( true );
+	    $map->setZoom( 10 );
+	    $map->setAdditionalCSSClasses( 'fullWidthMap' );
+	    $map->setShowInlineMapDivStyle( true );
+	    $map->setClusterer(false);
+	    //$map->addKML('http://assets.tripodtravel.co.nz/cycling/meuang-nont-to-bang-sue-loop.kml');
+	    return $map;
+	  }
 
 
 
@@ -78,31 +74,34 @@ class ContactPage extends Page  implements Mappable
 		//            _t('Header.ADDRESS','Address that will appear in the header of each page')
 
 
-		$fields->addFieldToTab( "Root.Content.OnSubmission",
+		$fields->addFieldToTab( "Root.OnSubmission",
 			new TextField( 'Mailto', _t( 'ContactPage.EMAIL_SUBMISSIONS_TO', 'Email submissions to' )
 			) );
 
-		$fields->addFieldToTab( "Root.Content.OnSubmission",
+		$fields->addFieldToTab( "Root.OnSubmission",
 			new HTMLEditorField( 'SubmitText', _t( 'ContactPage.TEXT_SHOWN_AFTER_SUBMISSION', 'Text on Submission' ) ) );
 
-		$fields->addFieldToTab( "Root.Content.Location", new LatLongField( array(
-					new TextField( 'Latitude', 'Latitude' ),
-					new TextField( 'Longitude', 'Longitude' ),
-					new TextField( 'Zoom', 'Zoom' )
-				),
-				array( 'Address' )
-			) );
+		$fields->addFieldToTab( "Root.Location", new LatLongField( array(
+          new TextField( 'Latitude', 'Latitude' ),
+          new TextField( 'Longitude', 'Longitude' ),
+          new TextField( 'Zoom', 'Zoom' )
+        ),
+          array( 'Address' )
+          ) 
+       );
 
-		$fields->addFieldToTab( 'Root.Content.Address', new TextAreaField( 'ContactAddress', _t( 'ContactPage.ADDRESS', 'Address' ) ) );
-		$fields->addFieldToTab( 'Root.Content.Address', new TextField( 'ContactTelephoneNumber',
+		$fields->addFieldToTab( 'Root.Address', new TextAreaField( 'ContactAddress', _t( 'ContactPage.ADDRESS', 'Address' ) ) );
+		$fields->addFieldToTab( 'Root.Address', new TextField( 'ContactTelephoneNumber',
 				_t( 'ContactPage.CONTACT_TELEPHONE_NUMBER', 'Contact Tel. Number' ) ) );
-		$fields->addFieldToTab( 'Root.Content.Address', new TextField( 'ContactFaxNumber',
+		$fields->addFieldToTab( 'Root.Address', new TextField( 'ContactFaxNumber',
 				_t( 'ContactPage.CONTACT_FAX_NUMBER', 'Contact Fax Number' ) ) );
-		$fields->addFieldToTab( 'Root.Content.Address', new TextField( 'ContactEmailAddress',
+		$fields->addFieldToTab( 'Root.Address', new TextField( 'ContactEmailAddress',
 				_t( 'ContactPage.CONTACT_EMAIL_ADDRESS_ADMIN', '(TH) Contact Email Address' ) ) );
 
-
-
+		$fields->addFieldToTab( 'Root.SocialMedia', new TextField( 'Facebook',
+				_t( 'ContactPage.FACEBOOK_URL', 'Facebook URL' ) ) );
+		$fields->addFieldToTab( 'Root.SocialMedia', new TextField( 'Twitter',
+				_t( 'ContactPage.TWITTER_USERNAME', 'Twitter Username' ) ) );
 
 		return $fields;
 	}
@@ -169,7 +168,7 @@ class ContactPage_Controller extends Page_Controller
 
 
 
-		$fields = new FieldSet(
+		$fields = new FieldList(
 			$tf,
 			$ef,
 			$taf
@@ -182,7 +181,7 @@ class ContactPage_Controller extends Page_Controller
 		$fa->useButtonTag = true;
 		$fa->addExtraClass( 'btn btn-primary' );
 
-		$actions = new FieldSet(
+		$actions = new FieldList(
 			$fa
 		);
 
@@ -200,11 +199,21 @@ class ContactPage_Controller extends Page_Controller
 	//The function that handles our form submission
 	function SendContactForm( $data, $form ) {
 
+		// saving data before sending contact form
+		$cpm = new ContactPageMessage();
+		$cpm->Email = $data['Email'];
+		$cpm->Name = $data['Name'];
+		$cpm->Comments = $data['Comments'];
+		$cpm->write();
+
+		error_log("==== CONTACT FORM ====");
+		error_log(print_r($data,1));
+
 		error_log( "Sending contact form" );
 
 		//Set data
-		//$From = $data['Email'];
-		$From = Email::getAdminEmail();
+		$From = $data['Email'];
+		//$From = Email::getAdminEmail();
 
 		$To = $this->Mailto;
 		$Subject = "Website Contact message";
@@ -244,8 +253,23 @@ class ContactPage_Controller extends Page_Controller
 	}
 
 
+	public function HasGeo() {
+		return (($this->Latitude !=0) && ($this->Longitude != 0));
+	}
+
+
+	public function HasSocialMedia() {
+		return $this->Twitter || $this->Facebook;
+	}
+
+	public function HasTelecomAddress() {
+		return $this->ContactEmailAddress || $this->ContactFaxNumber || $this->ContactTelephoneNumber;
+	}
+
+
 	public function ColumnLayout() {
 		return 'layout2col';
 	}
+
 
 }
