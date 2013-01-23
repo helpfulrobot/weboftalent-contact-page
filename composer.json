@@ -12,6 +12,6 @@
 	"require":
 	{
 		"silverstripe/framework": "3.*",
-		"weboftalent/mappable": "3.*"
+		"weboftalent/mappable": "*"
 	}
 }
