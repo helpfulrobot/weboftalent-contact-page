@@ -39,15 +39,15 @@ class ContactPage extends Page  implements Mappable
 		return $this->Longitude;
 	}
 
-	public function getMapContent() {
+	public function getMappableMapContent() {
 		return MapUtil::sanitize( $this->renderWith( 'ContactPageGoogleMapInfoWindow' ) );
 	}
 
-	public function getMapCategory() {
+	public function getMappableMapCategory() {
 		return $this->Type;
 	}
 
-	public function getMapPin() {
+	public function getMappableMapPin() {
 		return false; // use standard google pin
 	}
 
@@ -241,7 +241,7 @@ class ContactPage_Controller extends Page_Controller
 		}
 		else {
 			error_log( "SCF: NON AJAX" );
-			Director::redirect( Director::baseURL(). $this->URLSegment . "/?success=1" );
+			Controller::redirect( Director::baseURL(). $this->URLSegment . "/?success=1" );
 		}
 		//
 
