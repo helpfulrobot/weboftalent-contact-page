@@ -206,9 +206,7 @@ class ContactPage_Controller extends Page_Controller
 		$cpm->Comments = $data['Comments'];
 		$cpm->write();
 
-		error_log("==== CONTACT FORM ====");
-		error_log(print_r($data,1));
-
+	
 		error_log( "Sending contact form" );
 
 		//Set data
@@ -216,7 +214,8 @@ class ContactPage_Controller extends Page_Controller
 		//$From = Email::getAdminEmail();
 
 		$To = $this->Mailto;
-		$Subject = "Website Contact message";
+		$Subject = $this->SiteConfig()->Title.' - ';
+		$Subject .= "Website Contact message";
 		$email = new Email( $From, $To, $Subject );
 		//set template
 		$email->setTemplate( 'ContactEmail' );
@@ -227,20 +226,16 @@ class ContactPage_Controller extends Page_Controller
 		//return to submitted message
 
 		if ( $this->isAjax ) {
-			error_log( "SCF: AJAX" );
 			$result = array();
 
 
 			$result['message'] = $this->SubmitText;
 			$result['success'] = 1;
 
-			error_log( "ENCODING TO JSON" );
-
 			echo json_encode( $result );
 			die;
 		}
 		else {
-			error_log( "SCF: NON AJAX" );
 			Controller::redirect( Director::baseURL(). $this->URLSegment . "/?success=1" );
 		}
 		//
