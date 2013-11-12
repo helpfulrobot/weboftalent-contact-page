@@ -1,0 +1,6 @@
+---
+name: weboftalent-contact-page
+---
+ContactPage:
+  extensions:
+    ['MapExtension']
