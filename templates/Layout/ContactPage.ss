@@ -46,9 +46,7 @@ $ContactAddress
 
 
 <div class="span5">
-<% if HasGeo %>
-$Map
-<% end_if %>
+$BasicMap
 </div>
 </div>
 
