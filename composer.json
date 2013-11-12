@@ -1,17 +1,21 @@
 {
-	"name": "weboftalent/weboftalent-contact-page",
-	"description": "This module allows one to easily add a Facebook Likebox, a Likes button, and provide Facebook metadata",
+	"name": "weboftalent/contactage",
+	"description": "SilverStripe module to add a contact page with optional map to your site",
 	"type": "silverstripe-module",
-	"keywords": ["silverstripe", "facebook","weboftalent"],
+	"keywords": ["silverstripe", "contactpage","contact page"],
 	"authors": [
-	{
-		"name": "Gordon Anderson",
-		"email": "gordon@weboftalent.asia"
-	}
+		{
+			"name": "Gordon Anderson",
+			"email": "gordon.b.anderson@gmail.com",
+			"homepage": "https://github.com/gordonbanderson/weboftalent-contact-page",
+			"role": "Developer"
+		}
 	],
+    "support": {
+        "issues": "https://github.com/gordonbanderson/weboftalent-contact-page/issues"
+    },
 	"require":
 	{
-		"silverstripe/framework": "3.*",
-		"weboftalent/mappable": "*"
+		"silverstripe/framework": "~3.1"
 	}
 }
