@@ -53,15 +53,6 @@ class ContactPage extends Page
 		$fields->addFieldToTab( "Root.OnSubmission",
 			new HTMLEditorField( 'SubmitText', _t( 'ContactPage.TEXT_SHOWN_AFTER_SUBMISSION', 'Text on Submission' ) ) );
 
-		$fields->addFieldToTab( "Root.Location", new LatLongField( array(
-          new TextField( 'Latitude', 'Latitude' ),
-          new TextField( 'Longitude', 'Longitude' ),
-          new TextField( 'Zoom', 'Zoom' )
-        ),
-          array( 'Address' )
-          ) 
-       );
-
 		$fields->addFieldToTab( 'Root.Address', new TextAreaField( 'ContactAddress', _t( 'ContactPage.ADDRESS', 'Address' ) ) );
 		$fields->addFieldToTab( 'Root.Address', new TextField( 'ContactTelephoneNumber',
 				_t( 'ContactPage.CONTACT_TELEPHONE_NUMBER', 'Contact Tel. Number' ) ) );
