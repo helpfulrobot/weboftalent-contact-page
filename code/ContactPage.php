@@ -10,13 +10,10 @@
  ******************/
 
 //Model
-class ContactPage extends Page  implements Mappable
+class ContactPage extends Page
 {
 	static $db = array(
-		'Latitude' => 'Decimal(18,15)',
-		'Longitude' => 'Decimal(18,15)',
-		'Zoom' => 'Int',
-
+		
 		'ContactAddress' => 'Text',
 		'ContactTelephoneNumber' => 'Varchar(255)',
 		'ContactFaxNumber' => 'Varchar(255)',
@@ -29,33 +26,8 @@ class ContactPage extends Page  implements Mappable
 
 
 
-	/* Mappable interface requirements */
-
-	public function getMappableLatitude() {
-		return $this->Latitude;
-	}
-
-	public function getMappableLongitude() {
-		return $this->Longitude;
-	}
-
-	public function getMappableMapContent() {
-		return MapUtil::sanitize( $this->renderWith( 'ContactPageGoogleMapInfoWindow' ) );
-	}
-
-	public function getMappableMapCategory() {
-		return $this->Type;
-	}
-
-	public function getMappableMapPin() {
-		return false; // use standard google pin
-	}
-
-	/* end Mappable interface */
-
-
 	public function Map() {
-	    $map = $this->RenderMap();
+	    $map = $this->owner->RenderMap();
 	    // $map->setDelayLoadMapFunction( true );
 	    $map->setZoom( 10 );
 	    $map->setAdditionalCSSClasses( 'fullWidthMap' );
