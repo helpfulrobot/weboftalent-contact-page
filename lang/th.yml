@@ -1,0 +1,27 @@
+th:
+  ContactPage:
+    ADDRESS: ที่อยู่
+    COMMENTS: ข้อความ
+    CONTACT_EMAIL_ADDRESS: 'อีเมล์'
+    CONTACT_EMAIL_ADDRESS_ADMIN: '(TH) Contact Email Address'
+    CONTACT_FAX_NUMBER: 'โทรสาร'
+    CONTACT_TELEPHONE_NUMBER: 'โทรศัพท์'
+    DESCRIPTION: 'Generic content page'
+    EMAIL: อีเมล
+    EMAIL_SUBMISSIONS_TO: 'Email submissions to (TH)'
+    FACEBOOK: 'Facebook (TH)'
+    FACEBOOK_URL: 'Facebook URL (TH)'
+    NAME: ชื่อ
+    PLURALNAME: 'Contact Pages'
+    SEND: ส่ง
+    SINGULARNAME: 'Contact Page'
+    TELEPHONE_AND_EMAIL: 'โทรศัพท์โทรสารและอีเมล'
+    TEXT_SHOWN_AFTER_SUBMISSION: 'Text on Submission (TH)'
+    TWITTER: 'Twitter (TH)'
+    TWITTER_USERNAME: 'Twitter Username (TH)'
+    SOCIAL_MEDIA: 'Social Media (TH)'
+  ContactPageMessage:
+    PLURALNAME: 'Contact Page Messages (TH)'
+    SINGULARNAME: 'Contact Page Message (TH)'
+  ContactPageMessageAdmin:
+    MENUTITLE: ContactPageMessages
