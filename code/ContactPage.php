@@ -24,6 +24,9 @@ class ContactPage extends Page
 		'Facebook' => 'Varchar(255)'
 	);
 
+	private static $icon = 'contactage/icons/phone.png'; 
+
+
 
 
 	public function Map() {
@@ -44,6 +47,8 @@ class ContactPage extends Page
 		$fields = parent::getCMSFields();
 
 		//            _t('Header.ADDRESS','Address that will appear in the header of each page')
+		$addresstabname = 'Root.'._t('ContactPage.ADDRESS', 'Address');
+		$socialmediatabname = 'Root.'._t('ContactPage.SOCIAL_MEDIA', 'Social Media');
 
 
 		$fields->addFieldToTab( "Root.OnSubmission",
@@ -53,17 +58,17 @@ class ContactPage extends Page
 		$fields->addFieldToTab( "Root.OnSubmission",
 			new HTMLEditorField( 'SubmitText', _t( 'ContactPage.TEXT_SHOWN_AFTER_SUBMISSION', 'Text on Submission' ) ) );
 
-		$fields->addFieldToTab( 'Root.Address', new TextAreaField( 'ContactAddress', _t( 'ContactPage.ADDRESS', 'Address' ) ) );
-		$fields->addFieldToTab( 'Root.Address', new TextField( 'ContactTelephoneNumber',
+		$fields->addFieldToTab( $addresstabname, new TextAreaField( 'ContactAddress', _t( 'ContactPage.ADDRESS', 'Address' ) ) );
+		$fields->addFieldToTab( $addresstabname, new TextField( 'ContactTelephoneNumber',
 				_t( 'ContactPage.CONTACT_TELEPHONE_NUMBER', 'Contact Tel. Number' ) ) );
-		$fields->addFieldToTab( 'Root.Address', new TextField( 'ContactFaxNumber',
+		$fields->addFieldToTab( $addresstabname, new TextField( 'ContactFaxNumber',
 				_t( 'ContactPage.CONTACT_FAX_NUMBER', 'Contact Fax Number' ) ) );
-		$fields->addFieldToTab( 'Root.Address', new TextField( 'ContactEmailAddress',
+		$fields->addFieldToTab( $addresstabname, new TextField( 'ContactEmailAddress',
 				_t( 'ContactPage.CONTACT_EMAIL_ADDRESS_ADMIN', '(TH) Contact Email Address' ) ) );
 
-		$fields->addFieldToTab( 'Root.SocialMedia', new TextField( 'Facebook',
+		$fields->addFieldToTab( $socialmediatabname, new TextField( 'Facebook',
 				_t( 'ContactPage.FACEBOOK_URL', 'Facebook URL' ) ) );
-		$fields->addFieldToTab( 'Root.SocialMedia', new TextField( 'Twitter',
+		$fields->addFieldToTab( $socialmediatabname, new TextField( 'Twitter',
 				_t( 'ContactPage.TWITTER_USERNAME', 'Twitter Username' ) ) );
 
 		return $fields;
