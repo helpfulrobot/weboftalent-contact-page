@@ -1,0 +1,2 @@
+#Purpose of Module
+This module allows the site maintainer to add a contact page containing contact information such as phone, fax, email and also social media contacts.  An optional map of the location of your business can also be edited and displayed.  Lastly a form is displayed to allow an end user to send a message via an online form.
