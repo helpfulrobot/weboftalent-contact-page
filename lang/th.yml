@@ -5,6 +5,7 @@ th:
     CONTACT_EMAIL_ADDRESS: 'อีเมล์'
     CONTACT_EMAIL_ADDRESS_ADMIN: '(TH) Contact Email Address'
     CONTACT_FAX_NUMBER: 'โทรสาร'
+    CONTACT_FORM_INTRO: 'You can also contact us via this contact form (TH)'
     CONTACT_TELEPHONE_NUMBER: 'โทรศัพท์'
     DESCRIPTION: 'Generic content page'
     EMAIL: อีเมล
@@ -20,8 +21,18 @@ th:
     TWITTER: 'Twitter (TH)'
     TWITTER_USERNAME: 'Twitter Username (TH)'
     SOCIAL_MEDIA: 'Social Media (TH)'
+    PLURALNAME: 'Contact Pages (TH)'
+    SINGULARNAME: 'Contact Page (TH)'
   ContactPageMessage:
-    PLURALNAME: 'Contact Page Messages (TH)'
-    SINGULARNAME: 'Contact Page Message (TH)'
+    PLURALNAME: 'Contact Messages (TH)'
+    SINGULARNAME: 'Contact Message (TH)'
+    NAME: 'Name (TH)'
+    EMAIL: 'Email (TH)'
+    COMMENTS: 'Comments (TH)'
+    REPLIED_TO: 'Replied To (TH)'
   ContactPageMessageAdmin:
-    MENUTITLE: ContactPageMessages
+    MENUTITLE: 'Contact Messages (TH)'
+  CMSPagesController:
+    MENUTITLE: 'Pages (TH)'
+  CommentAdmin:
+    MENUTITLE: 'Comments (TH)'
