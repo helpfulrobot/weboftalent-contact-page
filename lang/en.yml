@@ -1,0 +1,33 @@
+en:
+  ContactPage:
+    ADDRESS: Address
+    COMMENTS: Comments
+    CONTACT_EMAIL_ADDRESS: 'Contact Email Address'
+    CONTACT_EMAIL_ADDRESS_ADMIN: 'Contact Email Address'
+    CONTACT_FAX_NUMBER: 'Contact Fax Number'
+    CONTACT_TELEPHONE_NUMBER: 'Contact Telepehone Number'
+    DESCRIPTION: 'Page shows address, telephone, email, and social media contacts. Optionally a map can be added.'
+    EMAIL: อีเมล
+    EMAIL_SUBMISSIONS_TO: 'Email submissions to'
+    FACEBOOK: 'Facebook'
+    FACEBOOK_URL: 'Facebook URL'
+    NAME: Name
+    PLURALNAME: 'Contact Pages'
+    SEND: Send
+    SINGULARNAME: 'Contact Page'
+    TELEPHONE_AND_EMAIL: 'Telephone and Email'
+    TEXT_SHOWN_AFTER_SUBMISSION: 'Text on Submission'
+    TWITTER: 'Twitter'
+    TWITTER_USERNAME: 'Twitter Username'
+    SOCIAL_MEDIA: 'Social Media'
+    PLURALNAME: 'Contact Pages'
+    SINGULARNAME: 'Contact Page'
+  ContactPageMessage:
+    PLURALNAME: 'Contact Messages'
+    SINGULARNAME: 'Contact Message'
+  ContactPageMessageAdmin:
+    MENUTITLE: 'Contact Messages'
+  CMSPagesController:
+    MENUTITLE: 'Pages'
+  CommentAdmin:
+    MENUTITLE: 'Comments'
