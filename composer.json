@@ -1,5 +1,5 @@
 {
-	"name": "weboftalent/contactage",
+	"name": "weboftalent/contactpage",
 	"description": "SilverStripe module to add a contact page with optional map to your site",
 	"type": "silverstripe-module",
 	"keywords": ["silverstripe", "contactpage","contact page"],
