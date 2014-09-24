@@ -24,20 +24,29 @@ class ContactPage extends Page
 		'Facebook' => 'Varchar(255)'
 	);
 
+
 	private static $icon = 'contactage/icons/phone.png'; 
 
 
+	public function SingularMap() {
+		return !$this::has_extension('ContactPageMultipleAddressExtension');
+	}
 
 
 	public function Map() {
-	    $map = $this->owner->RenderMap();
-	    // $map->setDelayLoadMapFunction( true );
-	    $map->setZoom( 10 );
-	    $map->setAdditionalCSSClasses( 'fullWidthMap' );
-	    $map->setShowInlineMapDivStyle( true );
-	    $map->setClusterer(false);
-	    //$map->addKML('http://assets.tripodtravel.co.nz/cycling/meuang-nont-to-bang-sue-loop.kml');
-	    return $map;
+		if ($this::has_extension('ContactPageMultipleAddress')) {
+			return '';
+		} else {
+			$map = $this->owner->RenderMap();
+		    // $map->setDelayLoadMapFunction( true );
+		    $map->setZoom( 10 );
+		    $map->setAdditionalCSSClasses( 'fullWidthMap' );
+		    $map->setShowInlineMapDivStyle( true );
+		    $map->setClusterer(false);
+		    //$map->addKML('http://assets.tripodtravel.co.nz/cycling/meuang-nont-to-bang-sue-loop.kml');
+		    return $map;
+		}
+
 	  }
 
 
@@ -49,6 +58,8 @@ class ContactPage extends Page
 		//            _t('Header.ADDRESS','Address that will appear in the header of each page')
 		$addresstabname = 'Root.'._t('ContactPage.ADDRESS', 'Address');
 		$socialmediatabname = 'Root.'._t('ContactPage.SOCIAL_MEDIA', 'Social Media');
+
+		$fields->addFieldToTab('Root.Main', new CheckboxField('ShowOnMap', 'Tick this box to show a map'));
 
 
 		$fields->addFieldToTab( "Root.OnSubmission",
@@ -70,6 +81,8 @@ class ContactPage extends Page
 				_t( 'ContactPage.FACEBOOK_URL', 'Facebook URL' ) ) );
 		$fields->addFieldToTab( $socialmediatabname, new TextField( 'Twitter',
 				_t( 'ContactPage.TWITTER_USERNAME', 'Twitter Username' ) ) );
+
+		$this->extend('updateContactPageForm', $fields);
 
 		return $fields;
 	}
