@@ -44,9 +44,8 @@ $ContactAddress
 </table>
 </div>
 
-
 <div class="span5">
-$BasicMap
+$Map
 </div>
 </div>
 
