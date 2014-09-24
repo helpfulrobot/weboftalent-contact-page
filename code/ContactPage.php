@@ -160,7 +160,7 @@ class ContactPage_Controller extends Page_Controller
 
 		// for bootstrap
 		$fa->useButtonTag = true;
-		$fa->addExtraClass( 'btn btn-primary' );
+		$fa->addExtraClass( 'btn btn-primary buttonright' );
 
 		$actions = new FieldList(
 			$fa
@@ -174,6 +174,11 @@ class ContactPage_Controller extends Page_Controller
 		$form = new Form( $this, 'ContactForm', $fields, $actions, $validator );
 		$form->setTemplate( 'VerticalForm' );
 		$form->addExtraClass( 'well' );
+
+		if(class_exists('SpamProtectorManager')) {
+        	$form->enableSpamProtection();
+    	}
+
 		return $form;
 	}
 
