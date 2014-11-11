@@ -87,6 +87,14 @@ class ContactPage extends Page
 		return $fields;
 	}
 
+	public function ShortenedFacebook() {
+		$result = str_replace('https:', 'http:', $this->Facebook);
+		$result = str_replace('http://facebook.com/', '', $result);
+		$result = str_replace('http://www.facebook.com/', '', $result);
+		$result = str_replace('http://facebook.com/', '', $result);
+		return $result;
+	}
+
 }
 
 // Controller
