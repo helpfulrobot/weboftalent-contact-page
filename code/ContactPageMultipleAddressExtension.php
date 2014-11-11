@@ -6,4 +6,11 @@ class ContactPageMultipleAddressExtension extends Extension {
 		$fields->removeByName('ContactFaxNumber');
 		$fields->removeByName('Location');
 	}
+
+	/*
+	Helper method for a template 
+	*/
+	public function HideAddressAndPhoneDetails() {
+		return true;
+	}
 }
