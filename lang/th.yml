@@ -1,38 +1,49 @@
 th:
   ContactPage:
     ADDRESS: ที่อยู่
-    COMMENTS: ข้อความ
+    #FIXME - check
+    BRANCHES: 'ร้าน'
+    COMMENTS: 'ข้อความ'
     CONTACT_EMAIL_ADDRESS: 'อีเมล์'
     CONTACT_EMAIL_ADDRESS_ADMIN: '(TH) Contact Email Address'
     CONTACT_FAX_NUMBER: 'โทรสาร'
+    #GOOTRAN
+    CONTACT_FORM: 'แบบฟอร์มติดต่อ'
     CONTACT_FORM_INTRO: 'You can also contact us via this contact form (TH)'
     CONTACT_TELEPHONE_NUMBER: 'โทรศัพท์'
-    DESCRIPTION: 'Generic content page'
+    DESCRIPTION: ''
     EMAIL: อีเมล
     EMAIL_SUBMISSIONS_TO: 'Email submissions to (TH)'
-    FACEBOOK: 'Facebook (TH)'
-    FACEBOOK_URL: 'Facebook URL (TH)'
-    NAME: ชื่อ
-    PLURALNAME: 'Contact Pages'
-    SEND: ส่ง
-    SINGULARNAME: 'Contact Page'
+    #BINGTRAN+LongDo
+    FACEBOOK: 'เฟซบุ๊ก'
+    #BINGTRAN+LongDo
+    FACEBOOK_URL: 'เฟซบุ๊ก ยูอาร์แอล'
+    INTERNET: 'อินเทอร์เนต'
+    NAME: 'ชื่อ'
+    SEND: 'ส่ง'
     TELEPHONE_AND_EMAIL: 'โทรศัพท์โทรสารและอีเมล'
     TEXT_SHOWN_AFTER_SUBMISSION: 'Text on Submission (TH)'
-    TWITTER: 'Twitter (TH)'
-    TWITTER_USERNAME: 'Twitter Username (TH)'
+    TWITTER: 'ทวิทเทอะ'
+    #GOOTRAN
+    TWITTER_USERNAME: 'ทวิทเทอะ ชื่อผู้ใช้'
     SOCIAL_MEDIA: 'Social Media (TH)'
-    PLURALNAME: 'Contact Pages (TH)'
-    SINGULARNAME: 'Contact Page (TH)'
+    #BINGTRAN
+    PLURALNAME: 'หน้าติดต่อ'
+    #BINGTRAN
+    SINGULARNAME: 'หน้าติดต่อ'
   ContactPageMessage:
-    PLURALNAME: 'Contact Messages (TH)'
-    SINGULARNAME: 'Contact Message (TH)'
-    NAME: 'Name (TH)'
-    EMAIL: 'Email (TH)'
-    COMMENTS: 'Comments (TH)'
+    #BINGTRAN
+    PLURALNAME: 'ข้อความที่ติดต่อ'
+    #BINGTRAN
+    SINGULARNAME: 'ข้อความที่ติดต่อ'
+    NAME: 'ชื่อ'
+    EMAIL: 'อีเมล'
+    COMMENTS: 'ข้อความ'
     REPLIED_TO: 'Replied To (TH)'
   ContactPageMessageAdmin:
-    MENUTITLE: 'Contact Messages (TH)'
-  CMSPagesController:
-    MENUTITLE: 'Pages (TH)'
-  CommentAdmin:
-    MENUTITLE: 'Comments (TH)'
+    #GOOTRAN
+    MENUTITLE: 'ข้อความที่ติดต่อ'
+
+
+
+# Advanced Search
