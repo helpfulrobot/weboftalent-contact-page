@@ -1,4 +1,4 @@
-<?php 
+<?php
 class ContactPageMultipleAddressExtension extends Extension {
 	public function updateContactPageForm(&$fields) {
 		$fields->removeByName('ContactAddress');
@@ -8,7 +8,7 @@ class ContactPageMultipleAddressExtension extends Extension {
 	}
 
 	/*
-	Helper method for a template 
+	Helper method for a template
 	*/
 	public function HideAddressAndPhoneDetails() {
 		return true;
