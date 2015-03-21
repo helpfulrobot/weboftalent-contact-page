@@ -13,7 +13,7 @@
 class ContactPage extends Page
 {
 	static $db = array(
-		
+
 		'ContactAddress' => 'Text',
 		'ContactTelephoneNumber' => 'Varchar(255)',
 		'ContactFaxNumber' => 'Varchar(255)',
@@ -25,7 +25,7 @@ class ContactPage extends Page
 	);
 
 
-	private static $icon = 'contactage/icons/phone.png'; 
+	private static $icon = 'contactage/icons/phone.png';
 
 
 	public function SingularMap() {
@@ -38,29 +38,25 @@ class ContactPage extends Page
 			return '';
 		} else {
 			$map = $this->owner->RenderMap();
-		    // $map->setDelayLoadMapFunction( true );
-		    $map->setZoom( 10 );
-		    $map->setAdditionalCSSClasses( 'fullWidthMap' );
-		    $map->setShowInlineMapDivStyle( true );
-		    $map->setClusterer(false);
-		    //$map->addKML('http://assets.tripodtravel.co.nz/cycling/meuang-nont-to-bang-sue-loop.kml');
-		    return $map;
+			// $map->setDelayLoadMapFunction( true );
+			$map->setZoom( 10 );
+			$map->setAdditionalCSSClasses( 'fullWidthMap' );
+			$map->setShowInlineMapDivStyle( true );
+			$map->setClusterer(false);
+			//$map->addKML('http://assets.tripodtravel.co.nz/cycling/meuang-nont-to-bang-sue-loop.kml');
+			return $map;
 		}
-
 	  }
-
 
 
 	//CMS fields
 	function getCMSFields() {
 		$fields = parent::getCMSFields();
 
-		//            _t('Header.ADDRESS','Address that will appear in the header of each page')
 		$addresstabname = 'Root.'._t('ContactPage.ADDRESS', 'Address');
 		$socialmediatabname = 'Root.'._t('ContactPage.SOCIAL_MEDIA', 'Social Media');
 
 		$fields->addFieldToTab('Root.Main', new CheckboxField('ShowOnMap', 'Tick this box to show a map'));
-
 
 		$fields->addFieldToTab( "Root.OnSubmission",
 			new TextField( 'Mailto', _t( 'ContactPage.EMAIL_SUBMISSIONS_TO', 'Email submissions to' )
@@ -87,6 +83,7 @@ class ContactPage extends Page
 		return $fields;
 	}
 
+
 	public function ShortenedFacebook() {
 		$result = str_replace('https:', 'http:', $this->Facebook);
 		$result = str_replace('http://facebook.com/', '', $result);
@@ -97,6 +94,7 @@ class ContactPage extends Page
 
 }
 
+
 // Controller
 class ContactPage_Controller extends Page_Controller
 {
@@ -105,7 +103,6 @@ class ContactPage_Controller extends Page_Controller
 		'ContactForm',
 		'SendContactForm'
 	);
-
 
 
 	function init() {
@@ -121,8 +118,6 @@ class ContactPage_Controller extends Page_Controller
 	}
 
 
-
-
 	function index() {
 		error_log( "Contact page index" );
 		error_log( "AJAX? ".$this->isAjax );
@@ -136,6 +131,7 @@ class ContactPage_Controller extends Page_Controller
 
 	}
 
+
 	//The function which generates our form
 	function ContactForm() {
 		error_log( "Render form" );
@@ -148,14 +144,11 @@ class ContactPage_Controller extends Page_Controller
 		$tf = new TextField( 'Name', $name );
 		$tf->addExtraClass( 'span11' );
 
-
 		$ef = new EmailField( 'Email', $email );
 		$ef->addExtraClass( 'span11' );
 
 		$taf = new TextareaField( 'Comments', $comments );
 		$taf->addExtraClass( 'span11' );
-
-
 
 		$fields = new FieldList(
 			$tf,
@@ -177,31 +170,26 @@ class ContactPage_Controller extends Page_Controller
 		// Create action
 		$validator = new RequiredFields( 'Name', 'Email', 'Comments' );
 
-
-
 		$form = new Form( $this, 'ContactForm', $fields, $actions, $validator );
 		$form->setTemplate( 'VerticalForm' );
 		$form->addExtraClass( 'well' );
 
 		if(class_exists('SpamProtectorManager')) {
-        	$form->enableSpamProtection();
-    	}
+			$form->enableSpamProtection();
+		}
 
 		return $form;
 	}
 
+
 	//The function that handles our form submission
 	function SendContactForm( $data, $form ) {
-
 		// saving data before sending contact form
 		$cpm = new ContactPageMessage();
 		$cpm->Email = $data['Email'];
 		$cpm->Name = $data['Name'];
 		$cpm->Comments = $data['Comments'];
 		$cpm->write();
-
-	
-		error_log( "Sending contact form" );
 
 		//Set data
 		$From = $data['Email'];
@@ -217,24 +205,19 @@ class ContactPage_Controller extends Page_Controller
 		$email->populateTemplate( $data );
 		//send mail
 		$email->send();
-		//return to submitted message
 
 		if ( $this->isAjax ) {
 			$result = array();
-
-
 			$result['message'] = $this->SubmitText;
 			$result['success'] = 1;
-
 			echo json_encode( $result );
 			die;
 		}
 		else {
 			Controller::redirect( Director::baseURL(). $this->URLSegment . "/?success=1" );
 		}
-		//
-
 	}
+
 
 	//The function to test whether to display the Submit Text or not
 	public function Success() {
@@ -251,6 +234,7 @@ class ContactPage_Controller extends Page_Controller
 		return $this->Twitter || $this->Facebook;
 	}
 
+
 	public function HasTelecomAddress() {
 		return $this->ContactEmailAddress || $this->ContactFaxNumber || $this->ContactTelephoneNumber;
 	}
@@ -259,6 +243,4 @@ class ContactPage_Controller extends Page_Controller
 	public function ColumnLayout() {
 		return 'layout2col';
 	}
-
-
 }
