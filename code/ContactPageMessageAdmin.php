@@ -7,4 +7,7 @@ class ContactPageMessageAdmin extends ModelAdmin {
 	static $url_segment = 'contactpagemessages';
 
 	static $menu_title = 'ContactPageMessages';
+
+	static $menu_icon = '/contactage/icons/menuicon.png';
+
 }
